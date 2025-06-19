@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  java-app:
+    build: .
+    container_name: backenddockercicd
+    ports:
+      - "5080:8080"
+    networks:
+      - backend-network
+
+  postgres:
+    image: postgres:16
+    container_name: postgrescontainer
+    environment:
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+    networks:
+      - backend-network
+
+networks:
+  backend-network:
+    driver: bridge
